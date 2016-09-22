@@ -1,4 +1,4 @@
-package vialFiller;
+package marbletables.vialfiller;
 
 import org.powerbot.script.PollingScript;
 import org.powerbot.script.Script;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Script.Manifest(name ="GE Vial Filler", description="Fills vials at GE", properties = "author=guy;topic=1234123;client=4;version=1;")
+@Script.Manifest(name ="GE Vial Filler", description="Fills vials at GE", properties = "author=MarbleTables;topic=1234123;client=4;version=1;")
 public class VialFiller extends PollingScript<ClientContext>{
 
 	private List<Task> taskList = new ArrayList<Task>();
@@ -16,7 +16,7 @@ public class VialFiller extends PollingScript<ClientContext>{
 	@Override
 	public void start()
 	{
-		taskList.addAll(Arrays.asList(new Deposit(ctx), new Withdraw(ctx), new WalkTo(ctx), new Fill(ctx), new WalkBack(ctx)));
+		taskList.addAll(Arrays.asList(new Bank(ctx), new WalkTo(ctx), new Fill(ctx), new WalkBack(ctx)));
 	}
 	
 	public void poll()

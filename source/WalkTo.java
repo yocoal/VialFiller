@@ -1,4 +1,4 @@
-package vialFiller;
+package marbletables.vialfiller;
 
 import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
@@ -8,7 +8,8 @@ import org.powerbot.script.rt4.TilePath;
 
 public class WalkTo extends Task<ClientContext> {
 	
-	private int fountainIds;
+	private int vialId = 229;
+	private int fountainId = 24897;
 	private final Tile[] fountainTile = { new Tile(3176,3487,0), new Tile(3189,3489,0),new Tile(3198,3481,0),new Tile(3192,3470)};
 	
 	public WalkTo(ClientContext ctx)
@@ -22,16 +23,16 @@ public class WalkTo extends Task<ClientContext> {
 	{
 		boolean fountainPresent = false;
 		// 24879 is the fountain #
-	
-	
-		return( ctx.inventory.select().id(229).size()==28 && ctx.objects.select().id(24897).size()==0);
+		return( ctx.inventory.select().id(vialId).size()==28 && ctx.objects.select().id(fountainId).size()==0);
 		
 	}
 	
 	@Override
 	public void execute()
 	{
-
-		ctx.movement.newTilePath(fountainTile).traverse();
+		while(ctx.movement.newTilePath(fountainTile).traverse())
+		{
+			ctx.movement.newTilePath(fountainTile).traverse();
+		}
 	}
 }
