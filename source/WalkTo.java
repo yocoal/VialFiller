@@ -21,7 +21,6 @@ public class WalkTo extends Task<ClientContext> {
 	// activate if we have 28 empty vials and NO PUMP AVAILABLE
 	public boolean activate()
 	{
-		boolean fountainPresent = false;
 		// 24879 is the fountain #
 		return( ctx.inventory.select().id(vialId).size()==28 && ctx.objects.select().id(fountainId).size()==0);
 		

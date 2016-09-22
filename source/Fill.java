@@ -36,19 +36,30 @@ public class Fill extends Task<ClientContext> {
 		//
 	
 		GameObject fountain  = ctx.objects.peek();
-		Item vial = ctx.inventory.poll();
+		Item vial = ctx.inventory.peek();
 		
-		// if we're already filling vials no need to click "Use" a million times
-		// so sleep for 20 seconds while vials are filling up
-		if(fountain.inViewport() && vial.valid() )
+		
+		// make sure fountain is in view, and vial about to selected is valid
+		// "Use" vial if we already haven't selected a vial
+		if(fountain.inViewport() && vial.valid() && !ctx.inventory.selectedItem().valid())
 		{
 			vial.interact("Use");
+			return;
+		}
+		
+		// same as above , ensure that fountain is in viewport and selected vial is valid
+		// also make sure that we've already selected vial
+		// then select the fountain and wait 20 seconds until vials are filled with water
+		if(fountain.inViewport() && vial.valid() && ctx.inventory.selectedItem().id() == vialId)
+		{
 			fountain.interact("Use");
 			Condition.sleep(20000);
 			
+			return;	
 		}
 		
 		return;
+		
 			
 			
 	}
